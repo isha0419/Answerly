@@ -28,7 +28,7 @@ export const useChat = () =>{
                 content:AImessage.content,
                 role:AImessage.role
             }));
-            dispatch(setCurrentChatId(chat._id));
+            dispatch(setCurrentChatId(chatId || chat._id));
         } catch (error) {
             console.error('Error sending message:', error);
             dispatch(setError(error.message || 'Failed to send message'));
