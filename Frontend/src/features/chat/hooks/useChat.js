@@ -33,6 +33,8 @@ export const useChat = () =>{
             console.error('Error sending message:', error);
             dispatch(setError(error.message || 'Failed to send message'));
             dispatch(setLoading(false));
+        }finally{
+          dispatch(setLoading(false))
         }
     }
 
