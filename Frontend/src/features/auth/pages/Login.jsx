@@ -7,6 +7,7 @@ import { useAuth } from '../hook/useAuth';
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [rememberMe, setRememberMe] = useState(false)
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const navigate = useNavigate();
   const { handleLogin } = useAuth();
@@ -22,14 +23,15 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setShouldRedirect(true)
     await handleLogin({ email: formData.email, password: formData.password })
   }
 
   useEffect(() => {
-    if (!loading && user) {
+    if (shouldRedirect && !loading && user) {
       navigate('/dashboard')
     }
-  }, [user, loading, navigate])
+  }, [shouldRedirect, user, loading, navigate])
 
   return (
     <div

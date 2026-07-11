@@ -1,12 +1,17 @@
-import {io} from "socket.io-client";
+import { io } from "socket.io-client";
 
-export const initializeSocketConnection = () =>{
-
-    const socket = io("http://localhost:3000", {
+export const initializeSocketConnection = () => {
+    const socket = io(import.meta.env.VITE_BACKEND_URL, {
         withCredentials: true,
     });
 
     socket.on("connect", () => {
-        console.log("Connected to Socket.io server with ID:", socket.id);
+        console.log("Connected to Socket.IO server:", socket.id);
     });
-}
+
+    socket.on("disconnect", () => {
+        console.log("Disconnected from Socket.IO server");
+    });
+
+    return socket;
+};

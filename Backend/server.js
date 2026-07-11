@@ -7,10 +7,12 @@ import { initSocket } from "./src/sockets/server.socket.js";
 
 connectToDB()
 
-const httpsServer = http.createServer(app)
-initSocket(httpsServer)
+const PORT = process.env.PORT || 3000;
 
-httpsServer.listen(3000, () => {
-    console.log("Server is running on port 3000")
+const httpServer = http.createServer(app)
+initSocket(httpServer)
+
+httpServer.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
 })
 
